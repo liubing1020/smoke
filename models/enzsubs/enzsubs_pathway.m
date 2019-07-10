@@ -1,0 +1,23 @@
+function enzsubs = enzsubs_pathway()
+enzsubs = pathway();
+enzsubs.data = [];
+enzsubs.data_times = [];
+enzsubs.meas_fun = @(x) x;
+enzsubs.x_names = { 'E' 'ES' 'S' 'P'};
+enzsubs.x_init = [ 10 0 15 0];
+enzsubs.x_init_upper = 1000*ones(1,length(enzsubs.x_init));
+enzsubs.x_init_lower = 0*ones(1,length(enzsubs.x_init));
+enzsubs.x_init_estimate = [];
+enzsubs.p_nominal = [ 0.1 0.1 0.35];
+enzsubs.p_lim_upper = [ 1 1 1];
+enzsubs.p_lim_lower = [ 0 0 0];
+enzsubs.p_estimate = [ 1 2 3];
+i = [1  2  3  1  2];
+j = [1  1  1  2  2];
+enzsubs.sim_jac_pattern = sparse(i,j,1);
+enzsubs.sim_reltol = 1e-2;
+enzsubs.sim_abstol = 1e-5;
+enzsubs.sim_fun = @enzsubs_ode_mex;
+enzsubs.species_dep = [0  1  0  0];
+enzsubs.sim_method = 'ode15s';
+end
