@@ -1,12 +1,12 @@
-## Welcome to GitHub Pages
+### SMOKE
 
-You can use the [editor on GitHub](https://github.com/liubing1020/smoke/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+SMOKE is a Statistical MOdel checKing tool for Estimating unknown parameters of dynamical models. It can utilize both quantitative data and qualitative knowledge for calibrating large models with hundreds of unknown parameters. It was originally developed for analyzing ordinary differential equation (ODE) models of biological networks, and currently being generalized to other modeling formalisms including stochastic models, rule-based models, and hybrid models. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Features
 
-### Markdown
+### Install
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+SMOKE requires matlab. It can be installed by unzip the source code folder. 
 
 ```markdown
 Syntax highlighted code block
@@ -28,10 +28,14 @@ Syntax highlighted code block
 
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-### Jekyll Themes
+### Using SMOKE
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/liubing1020/smoke/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+### Citation
 
-### Support or Contact
+B Liu, B Gyori, P S Thiagarajan. [Statistical Model Checking based Analysis of Biological Networks](http://www.pitt.edu/~liubing/publication/arsbm18.pdf), Automated Reasoning for Systems Biology and Medicine, 63-92 (2019). doi: 10.1007/978-3-030-17297-8_3
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+
+### Funding
+
+Partial support from the NIH awards P41 GM103712 and P30 DA035778 is gratefully acknowledged.
+
