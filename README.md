@@ -1,3 +1,5 @@
+<img src="/image/logo.png"/>
+
 ### SMOKE
 
 SMOKE is a Statistical MOdel checKing tool for Estimating unknown parameters of dynamical models. It can utilize both quantitative data and qualitative knowledge for calibrating large models with hundreds of unknown parameters. It was originally developed for analyzing ordinary differential equation (ODE) models of biological networks, and currently being generalized to other modeling formalisms including stochastic models, rule-based models, and hybrid models. 
