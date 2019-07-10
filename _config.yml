@@ -1,2 +1,2 @@
 theme: jekyll-theme-cayman
-baseUrl: "//liubing1020.github.io/smoke/"
+baseUrl = "//liubing1020.github.io/smoke/"
