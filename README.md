@@ -1,4 +1,4 @@
-<img src="/image/logo.jpg"/>
+<img src="./image/logo.jpg"/>
 
 ### SMOKE
 
