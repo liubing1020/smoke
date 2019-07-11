@@ -1,0 +1,131 @@
+begin model
+begin parameters
+	scaling_death 9.24026997277549
+	scavenging_rate 0.001
+	ModelValue_1 (9.24026997277549)
+	r1_k 756.429000
+	r1_Kma 8599.980000
+	r1_Kmb 1850410.000000
+	r2_Km 17748.500000
+	r2_V 115306.000000
+	r3_k 0.116100
+	r3_km 9514.370000
+	r4_k1 0.100000
+	r5_k 1146.670000
+	r5_km 12978.200000
+	r6_v 1.000000
+	r7_k 10.000000
+	r7_km 1000.000000
+	r8_Km 52.300000
+	r8_V 0.098000
+	r9_k 0.100000
+	r9_km 50.000000
+	r10_k1 0.000066
+	r11_k1 0.001234
+	r12_k1 0.010000
+	r13_k1 0.010000
+	r14_k1 0.100000
+	r17_k1 0.100000
+	r18_k1 0.100000
+end parameters
+begin compartments
+	#volume units: L
+	c 3 1e-12
+	cell 3 1.0
+end compartments
+begin molecule types
+	s15LOXFe2()
+	AA_PE()
+	OOH_AA_PE()
+	OH_AA_PE()
+	measurement_death()
+	SNAP()
+	PEoxtr()
+	NO()
+	iNOS()
+	AA()
+	s15LOXFe3()
+	GSSG()
+	ACSL4_LPCAT3()
+	GPX4()
+	NO_PE()
+	GSH()
+	RSL3()
+	L_NIL()
+	NO_PEoxtr()
+	death
+end molecule types
+begin seed species
+	@c:GSH() 629299000.0000001 # (1045000.0 * 1e-09)mol/L * 6.022e23/mol *1e-12L #GSH #GSH
+	@c:GPX4() 36132.00000000001 #original 60.0substance/L  #GPX4 #GPX4
+	@c:GSSG() 629299000.0000001 #original 1045000.0substance/L  #GSSG #GSSG
+	@c:s15LOXFe3() 2408.8000000000006 #original 4.0substance/L  #s15LOXFe3 #LOX
+	@c:$measurement_death() 0 #measurement_death #measurement_death
+	@c:AA_PE() 0.6022000000000001 #original 0.001substance/L  #AA_PE #PE_AA
+	@c:AA() 602.1999999999995 #original 0.999999999999999substance/L  #AA #AA
+	@c:ACSL4_LPCAT3() 409.4960000000001 #original 0.68substance/L  #ACSL4_LPCAT3 #ACSL4_LCAT3
+	@c:RSL3() 301100.00000000006 #original 500.0substance/L  #RSL3 #RSL3
+	@c:iNOS() 6022.0 #original 10.0substance/L  #iNOS #iNos
+	@c:NO_PE() 602.2000000000002 #original 1.0substance/L  #NO_PE #NO_PE
+	death@cell 0
+end seed species
+begin observables
+	Species GSH_c @c:GSH() #GSH
+	Species GPX4_c @c:GPX4() #GPX4
+	Species GSSG_c @c:GSSG() #GSSG
+	Species OOH_AA_PE_c @c:OOH_AA_PE() #OOH-AA-PE
+	Species OH_AA_PE_c @c:OH_AA_PE() #OH-AA-PE
+	Species s15LOXFe3_c @c:s15LOXFe3() #15LOXFe3
+	Species measurement_death_c @c:measurement_death() #measurement_death
+	Species AA_PE_c @c:AA_PE() #AA-PE
+	Species AA_c @c:AA() #AA
+	Species ACSL4_LPCAT3_c @c:ACSL4_LPCAT3() #ACSL4/LPCAT3
+	Species RSL3_c @c:RSL3() #RSL3
+	Species s15LOXFe2_c @c:s15LOXFe2() #15LOXFe2
+	Species NO_c @c:NO() #NO
+	Species iNOS_c @c:iNOS() #iNOS
+	Species PEoxtr_c @c:PEoxtr() #PEoxtr
+	Species NO_PEoxtr_c @c:NO_PEoxtr() #NO-PEoxtr
+	Species NO_PE_c @c:NO_PE() #NO-PE
+	Species SNAP_c @c:SNAP() #SNAP
+	Species L_NIL_c @c:L_NIL() #L-NIL
+	Species death death
+end observables
+begin functions
+	functionRate0() = (756.429 * GPX4_c / (8599.98 * 1850410.0 + GSH_c * 8599.98 + OOH_AA_PE_c * 1850410.0 + GSH_c * OOH_AA_PE_c)) / 6.022e23
+	functionRate1() = 115306.0 / (17748.5 + GSSG_c)
+	functionRate2() = 0.1161 * s15LOXFe3_c / (9514.37 + AA_PE_c)
+	functionRate4() = 1146.67 * GPX4_c / (12978.2 + GSH_c)
+	functionRate6() = 10.0 * ACSL4_LPCAT3_c / (1000.0 + AA_c)
+	functionRate7() = 0.098 / (52.3 + s15LOXFe2_c)
+	functionRate8() = 0.1 * NO_c / (50.0 + s15LOXFe3_c)
+	functionRate9() = (6.58678e-05) / 6.022e23
+	functionRate14() = (scavenging_rate) / 6.022e23
+	functionRate15() = (scavenging_rate) / 6.022e23
+	functionRate17() = (0.1) / 6.022e23
+	measurement_death_ar() = death * ModelValue_1 / (time() + 1)
+	arRatedeath() = PEoxtr_c + OOH_AA_PE_c
+	armRatedeath() = 0
+end functions
+begin reaction rules
+	GPX4_0: GSH()@c + OOH_AA_PE()@c -> GSSG()@c + OH_AA_PE()@c functionRate0() #Modifiers(GPX4)
+	GR_0: GSSG()@c -> GSH()@c functionRate1()
+	PE_AA_OOH_production: AA_PE()@c -> OOH_AA_PE()@c functionRate2() #Modifiers(LOX)
+	PE_AA_OH_degradation: OH_AA_PE()@c -> 0  r4_k1
+	GPX4_basal: GSH()@c -> GSSG()@c functionRate4() #Modifiers(GPX4)
+	AA_production: 0  -> AA()@c r6_v
+	ACSL4_LCAT3_0: AA()@c -> AA_PE()@c functionRate6() #Modifiers(ACSL4_LCAT3)
+	LOX_production: s15LOXFe2()@c -> s15LOXFe3()@c functionRate7()
+	LOX_degradation: s15LOXFe3()@c -> s15LOXFe2()@c functionRate8() #Modifiers(NO)
+	RSL3_0: RSL3()@c + GPX4()@c -> RSL3()@c functionRate9()
+	RSL3_degradation: RSL3()@c -> 0  r11_k1
+	n01: iNOS()@c -> NO()@c + iNOS()@c r12_k1
+	r10: NO()@c -> 0  r13_k1
+	r06: OOH_AA_PE()@c -> PEoxtr()@c r14_k1
+	r12: PEoxtr()@c + NO()@c -> NO_PEoxtr()@c functionRate14()
+	r11: OOH_AA_PE()@c + NO()@c -> NO_PE()@c functionRate15()
+	r18: SNAP()@c -> NO()@c + SNAP()@c r17_k1
+	r14: iNOS()@c + L_NIL()@c -> L_NIL()@c functionRate17()
+	#0  <-> death() arRatedeath,armRatedeath #rateLaw
+end reaction rules
+end model
