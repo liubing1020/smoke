@@ -13,5 +13,5 @@ B Liu, B Gyori, P S Thiagarajan. [Statistical Model Checking based Analysis of B
 
 ### Funding
 
-Partial support from the NIH awards P41 GM103712 and P30 DA035778 is gratefully acknowledged.
+Partial support from the NIH awards P41GM103712, P30DA035778, and U19A168021 is gratefully acknowledged.
 
